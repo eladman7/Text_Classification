@@ -62,3 +62,10 @@ patch size:
   parser.add_argument("--input_width", type=int , default = 320 )
 number of epochs:
   parser.add_argument("--epochs", type = int, default = 50 )
+  
+
+specific parametes for my run:
+data was taken from 'pinkas' data set which contain hebrew subscripts from 18th and 19th centuries.
+number of train patches: 30,000
+number of validation patches: 1,500
+number of epochs: 50
