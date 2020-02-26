@@ -1,7 +1,7 @@
 # Text_Classification
 About the code:
 the following project is intended to learn and classify images into 2 classes: text and none text.
-users will have to prepare labeled images i.e. black & white images where text areas is black and all other are white.
+users will have to prepare labeled images i.e. black & white images where text areas are black and all other are white.
 user will have to choose some of the raw and labeled images to serve as training data and some to test the alg with.
 
 Project Structure:
