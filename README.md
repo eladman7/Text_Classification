@@ -68,4 +68,7 @@ specific parametes for my run:
 data was taken from 'pinkas' data set which contain hebrew subscripts from 18th and 19th centuries.
 number of train patches: 30,000
 number of validation patches: 1,500
-number of epochs: 50
+number of epochs: 15 with 1875 iterations each
+results:
+accuracy level: 0.9635, loss: 0.0877
+
