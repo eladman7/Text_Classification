@@ -72,3 +72,5 @@ number of epochs: 15 with 1875 iterations each
 results:
 accuracy level: 0.9635, loss: 0.0877
 
+f-measures:
+main text area - 0.868361059062
