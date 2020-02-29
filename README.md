@@ -73,4 +73,4 @@ results:
 accuracy level: 0.9635, loss: 0.0877
 
 f-measures:
-main text area = 0.8978090280654025
+main text area = 0.915914944576
