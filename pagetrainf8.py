@@ -96,12 +96,6 @@ m.compile(loss='categorical_crossentropy',
       optimizer= sgd,
       metrics=['accuracy'])
 
-#
-#if len( load_weights ) > 0:
-#    print("loading initial weights")
-#    m.load_weights(load_weights)
-
-
 print ( m.output_shape)
 
 output_height = m.outputHeight
@@ -153,7 +147,8 @@ else:
                 l=len(pn)
                 add= 4-l
                 npa=''
-                if add==1:
+                # aligning file names length
+		if add==1:
                     npa=p.replace('patch'+pn,'patch0'+pn)
                 if add==2:
                     npa=p.replace('patch'+pn,'patch00'+pn)
@@ -186,7 +181,6 @@ else:
                     pathc=pathc+1
                     oldpage=page
     
-    
             c2=0      
             for group in g:
                 print('group[0]',group[0])
@@ -210,7 +204,6 @@ else:
             predfolder='out/'
             epsilon=0.0000000001
             fmain=[]
-            #fside=[]
             for p in os.listdir(truefolder):
                 print(p)
                 true=cv2.imread(truefolder+p,0)
@@ -229,12 +222,10 @@ else:
                         if pred[i,j,0]==255 and pred[i,j,1]<255:
                             pred[i,j,0]=0
                             pred[i,j,1]=0
-#                            # pred[i,j,2]=0
                          # original: if pred[i,j,0]<255 and pred[i,j,1]<255 and pred[i,j,2]==255: 
                         if pred[i,j,0]<255 and pred[i,j,1]<255:
                             pred[i,j,0]=128
                             pred[i,j,1]=128
-#                            # pred[i,j,2]=128
                 pred[pred<128]=0
                 p1=pred>128
                 p2=pred<255
@@ -242,6 +233,10 @@ else:
             
                 pred=pred[:,:,0]
             
+		# after this stage pred is a gray&white image
+		# where gray predicting the text area and white nont text
+		# notice the label in the true image is black for text and white for none text
+		
                 rows,cols=pred.shape
                 print(pred.shape)
         
@@ -249,10 +244,6 @@ else:
                 mtp=0
                 mfp=0
                 mfn=0
-                #sallp=0
-                #stp=0
-                #sfp=0
-                #sfn=0
                 for i in range(rows):
                     for j in range(cols):
                         if true[i,j]==0:
@@ -265,24 +256,11 @@ else:
                             mfp=mfp+1
                         if true[i,j]==0 and pred[i,j]==255:
                             mfn=mfn+1
-                        #if true[i,j]==128:
-                        #    sallp=sallp+1
-                        #if true[i,j]==128 and pred[i,j]==128:
-                        #    stp=stp+1
-                        #if true[i,j]==0 and pred[i,j]==128:
-                        #    sfp=sfp+1
-                        #if true[i,j]==128 and pred[i,j]==0:
-                        #    sfn=sfn+1
                 if mallp>0:
                     fm=(2.*mtp+epsilon)/(2.*mtp+mfp+mfn+epsilon)
                     fmain.append(fm)
                     print(p)
                     print(fm)
-                #if sallp>0:
-                #    fs=(2.*stp+epsilon)/(2.*stp+sfp+sfn+epsilon)
-                #    print(p)
-                #    print(fs)
-                #    fside.append(fs)
                 print(p+' is finished')
                 print('')
             print('main f measure:')
